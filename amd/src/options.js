@@ -21,12 +21,29 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-const component = 'tiny_fontfamily';
+import {getPluginOptionName} from 'editor_tiny/options';
+import {pluginName} from './common';
 
-export default {
-    component,
-    pluginName: `${component}/plugin`,
-    icon: component,
-    fontfamilyButtonName: `${component}_fontfamily`,
-    fontfamilyMenuItemName: `${component}_fontfamily`,
+const fonts = getPluginOptionName(pluginName, 'fonts');
+
+/**
+ * Register the options for the Tiny Equation plugin.
+ *
+ * @param {TinyMCE} editor
+ */
+export const register = (editor) => {
+
+    editor.options.register(fonts, {
+        processor: 'Array',
+        "default": [],
+    });
+
 };
+
+/**
+ * Get the list of fonts.
+ *
+ * @param {TinyMCE.editor} editor
+ * @returns {Array} Array.
+ */
+export const getFontList = (editor) => editor.options.get(fonts);

@@ -72,6 +72,5 @@ class plugininfo extends plugin implements plugin_with_configuration, plugin_wit
         $config = [];
         $config['fonts'] = explode("\r\n", get_config('tiny_fontfamily', 'fonts'));
         return $config;
-
     }
 }

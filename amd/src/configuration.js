@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,21 +14,19 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Tiny tiny_fontfamily for Moodle.
+ * tiny_fontfamily for Moodle.
  *
- * @module      plugintype_pluginname/plugin
- * @copyright   2023 Mikko Haiku <mikko.haiku@mediamaisteri.com>
+ * @module      tiny_fontfamily
+ * @copyright   2024 Mikko Haiku <mikko.haiku@mediamaisteri.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 import {
-    fontfamilyButtonName,
     fontfamilyMenuItemName,
 } from './common';
 
 import {
     addMenubarItem,
-    addToolbarButtons,
 } from 'editor_tiny/utils';
 
 const getToolbarConfiguration = (instanceConfig) => {

@@ -14,13 +14,14 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Commands helper for the Moodle tiny_fontfamily plugin.
+ * tiny_fontfamily for Moodle.
  *
- * @module      plugintype_pluginname/commands
- * @copyright   2023 Mikko Haiku <mikko.haiku@mediamaisteri.com>
+ * @module      tiny_fontfamily
+ * @copyright   2024 Mikko Haiku <mikko.haiku@mediamaisteri.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+import {getFontList} from './options';
 import {getButtonImage} from 'editor_tiny/utils';
 import {get_string as getString} from 'core/str';
 import {
@@ -59,6 +60,14 @@ export const getSetup = async() => {
     ]);
 
     return (editor) => {
+
+        const fontList = getFontList(editor);
+
+        // If there is only one font available, we don't need the plugin.
+        if (fontList.length < 2) {
+            return;
+        }
+
         // Register the Moodle SVG as an icon suitable for use as a TinyMCE toolbar button.
         editor.ui.registry.addIcon(icon, buttonImage.html);
 
@@ -77,18 +86,8 @@ export const getSetup = async() => {
             onAction: () => handleAction(editor),
         });
 
-        // Define the font familys and their corresponding text labels
-        const fontfamilys = [
-            { family: "Arial", label: "Arial" },
-            { family: "Verdana", label: "Verdana" },
-            { family: "Tahoma", label: "Tahoma" },
-            { family: "Trebuchet MS", label: "Trebuchet MS" },
-            { family: "Times New Roman", label: "Times New Roman" },
-            { family: "Georgia", label: "Georgia" },
-            { family: "Garamond", label: "Garamond" },
-            { family: "Courier New", label: "Courier New" },
-            { family: "Brush Script MT", label: "Brush Script MT" },
-        ];
+        // Define the font families and their corresponding text labels
+        const fontfamilies = fontList.map(font => ({ family: font, label: font }));
 
         /**
          * Handle the font family menu item action.
@@ -102,7 +101,7 @@ export const getSetup = async() => {
         }
 
         // Create an array of submenu items using a map function
-        const submenuItems = fontfamilys.map(({family, label}) => ({
+        const submenuItems = fontfamilies.map(({family, label}) => ({
             type: 'menuitem',
             text: label,
             onAction: handlefontfamily(editor, family),
