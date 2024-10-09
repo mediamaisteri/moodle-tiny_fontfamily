@@ -29,3 +29,6 @@ $string['button_fontfamily'] = 'Font family';
 $string['menuitem_fontfamily'] = 'Font family';
 $string['pluginname'] = 'Font family plugin';
 $string['privacy:metadata'] = 'Font family plugin does not store any personal data';
+$string['fonts'] = "Font families";
+$string['settings'] = "Settings";
+$string['fonts_desc'] = "List of available font families separated by a new line.";

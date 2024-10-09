@@ -69,6 +69,9 @@ class plugininfo extends plugin implements plugin_with_configuration, plugin_wit
         array $fpoptions,
         ?\editor_tiny\editor $editor = null
     ): array {
-        return [];
+        $config = [];
+        $config['fonts'] = explode("\r\n", get_config('tiny_fontfamily', 'fonts'));
+        return $config;
+
     }
 }
